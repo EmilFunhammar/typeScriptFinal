@@ -22,19 +22,43 @@ type BasicProps = {
 
 export default function Profile(id: BasicProps) {
   console.log('värdet är emil', id);
-  const [data, setData] = useState<BasicProps[]>([]);
+  const [dataItem, setItemData] = useState<BasicProps[]>([]);
 
   const fetchData = () => {
     fetch(`https://fakestoreapi.com/products/${2}`)
       .then((response) => response.json())
       .then((json) => {
+        // console.log('json results:', json);
+        // let dataResults: BasicProps[] = [];
+        // json.forEach(
+        //   (item: {
+        //     title: string;
+        //     id: number;
+        //     category: string;
+        //     description: string;
+        //     price: number;
+        //     image: string;
+        //   }) => {
+        //     let result = {
+        //       title: item.title,
+        //       id: item.id,
+        //       category: item.category,
+        //       description: item.description,
+        //       image: item.image,
+        //       price: item.price,
+        //     };
+        //     dataResults.push(result);
+        //   }
+        // );
+        // setItemData(dataResults);
+
         let result: BasicProps[] = [];
         result.push(json.title);
         result.push(json.description);
         result.push(json.price);
         result.push(json.image);
         result.push(json.category);
-        setData(result);
+        setItemData(result);
 
         //let dataResults: BasicProps[] = [];
         //dataResults.push(json);
@@ -64,13 +88,13 @@ export default function Profile(id: BasicProps) {
           }}
           resizeMode="contain"
           source={{
-            uri: data[3],
+            uri: dataItem[3],
           }}
         />
       </View>
       <View>
         <Text style={{ fontSize: 22, fontWeight: 'bold', marginLeft: 20 }}>
-          {data[0]}
+          {dataItem[0]}
         </Text>
         <Text
           style={{
@@ -80,7 +104,7 @@ export default function Profile(id: BasicProps) {
             marginTop: 20,
           }}
         >
-          {data[2]}
+          {dataItem[2]}
         </Text>
         <Text
           style={{
@@ -92,7 +116,7 @@ export default function Profile(id: BasicProps) {
         >
           Description
         </Text>
-        <Text style={{ fontSize: 16, marginLeft: 20 }}>{data[1]}</Text>
+        <Text style={{ fontSize: 16, marginLeft: 20 }}>{dataItem[1]}</Text>
         <Text
           style={{
             fontSize: 22,
@@ -101,7 +125,7 @@ export default function Profile(id: BasicProps) {
             marginTop: 20,
           }}
         >
-          {data[4]}
+          {dataItem[4]}
         </Text>
         <Button
           title="add to cart"
